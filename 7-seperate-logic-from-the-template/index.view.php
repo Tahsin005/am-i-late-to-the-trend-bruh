@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>6-lambda-functions</title>
+    <title>7-seperate-logic-from-the-template</title>
     <style>
         body {
             font-family: sans-serif;
