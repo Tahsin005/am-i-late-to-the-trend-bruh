@@ -1,7 +1,5 @@
 <?php
 
-require base_path('Validator.php');
-
 $heading = "Create Note";
 
 $config = require base_path('config.php');
@@ -28,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 
-require view("notes/create.view.php", [
+view("notes/create.view.php", [
     "heading" => $heading,
     'errors' => $errors ?? []
 ]);

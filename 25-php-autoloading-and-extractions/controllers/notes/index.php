@@ -12,7 +12,7 @@ $notes = $db->query("SELECT * FROM notes where user_id = 5")->get();
 
 // dd($notes);
 
-require view("notes/index.view.php", [
+view("notes/index.view.php", [
     "heading" => $heading,
     'notes' => $notes
 ]);
