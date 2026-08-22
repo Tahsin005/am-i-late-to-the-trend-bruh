@@ -1,0 +1,38 @@
+<?php
+
+use Core\App;
+use Core\Database;
+use Core\Validator;
+
+$heading = "Edit Note";
+
+$db = App::resolve(Database::class);
+
+$currentUserId = 5;
+
+$note = $db->query("SELECT * FROM notes where id = :id", ['id' => $_POST['id']])->findOrFail();
+
+authorize($note['user_id'] === $currentUserId);
+
+$errors = [];
+
+if (!Validator::string($_POST['body'], 1, 1000)) {
+    $errors['body'] = 'A Body of no less than 1 and no more than 1000 characters is required';
+}
+
+if (!empty($errors)) {
+    // validation issue here
+    return view("notes/edit.view.php", [
+        "heading" => $heading,
+        "errors" => $errors,
+        "note" => $note,
+    ]);
+}
+
+
+$db->query('update notes set body = :body where id = :id', [
+    'id' => $_POST['id'],
+    'body' => $_POST['body'],
+]);
+
+header('Location: /notes');
